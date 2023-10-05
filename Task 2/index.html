@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Примитивный калькулятор</title>
+    <style>
+      .calculator {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-gap: 5px;
+        max-width: 200px;
+      }
+      .answer {
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="calculator">
+      <button onclick="appendToInput('7')">7</button>
+      <button onclick="appendToInput('8')">8</button>
+      <button onclick="appendToInput('9')">9</button>
+      <button onclick="appendToInput('/')">/</button>
+      <button onclick="appendToInput('4')">4</button>
+      <button onclick="appendToInput('5')">5</button>
+      <button onclick="appendToInput('6')">6</button>
+      <button onclick="appendToInput('*')">*</button>
+      <button onclick="appendToInput('1')">1</button>
+      <button onclick="appendToInput('2')">2</button>
+      <button onclick="appendToInput('3')">3</button>
+      <button onclick="appendToInput('-')">-</button>
+      <button onclick="appendToInput('0')">0</button>
+      <button onclick="appendToInput('.')">.</button>
+      <button onclick="appendToInput('+')">+</button>
+      <button onclick="calculate()">=</button>
+    </div>
+    <div class="answer">
+      <input type="text" id="result" readonly />
+      <button onclick="clearInput()">Очистить</button>
+    </div>
+
+    <div id="history">
+      <h1>История действий</h1>
+    </div>
+
+    <script>
+      function appendToInput(value) {
+        document.getElementById("result").value += value;
+      }
+
+      function calculate() {
+        var input = document.getElementById("result").value;
+        var result = eval(input);
+        addHistory(input, result);
+      }
+
+      function addHistory(input, result) {
+        document
+          .getElementById("history")
+          .append(input + " = " + result + ";   ");
+        document.getElementById("result").value = "";
+      }
+
+      function clearInput() {
+        document.getElementById("result").value = "";
+      }
+    </script>
+  </body>
+</html>
